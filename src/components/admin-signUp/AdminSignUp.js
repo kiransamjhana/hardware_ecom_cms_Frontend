@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import { BiSolidUserDetail } from "react-icons/bi";
 import { Button, Form } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { CustomInput } from "../customI-Input/CustomInput";
+import { createNewAdminAction } from "../../pages/signIN-singUp/adminAction";
 export const AdminSignUp = () => {
   const [form, setForm] = useState({});
   const inputs = [
@@ -62,8 +64,13 @@ export const AdminSignUp = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    const { confirmPassword, ...rest } = form;
+    if (confirmPassword !== rest.password) {
+      return toast.error("Password should match");
+    }
+    createNewAdminAction(rest);
   };
+  console.log(form);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

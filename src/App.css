@@ -1,3 +1,27 @@
 .main {
   min-height: 93vh;
+  background: rgba(92, 76, 12, 0.404);
+}
+
+.admin-layout {
+  display: flex;
+}
+.admin-layout .side-bar {
+  width: 230px;
+  position: fixed;
+  height: 100vh;
+}
+.admin-layout .main {
+  margin-left: 230px;
+  width: calc(100vw-230px);
+}
+
+.page-content {
+  height: 83vh;
+}
+
+.side-nav li {
+  line-height: 2rem;
+  font-weight: 600;
+  font-size: 1.3rem;
 }
