@@ -23,10 +23,10 @@ function App() {
         <Route path="/" element={<SignIn />} />
         <Route path="/new-admin" element={<SignUp />} />
         <Route path="/admin-verification" element={<VerifiyAdmin />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/catagory" element={<Catagory />} />
+        <Route path="/dashbord" element={<DashBoard />} />
+        <Route path="/category" element={<Catagory />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment-option" element={<Payment />} />
         <Route path="/order" element={<Order />} />
         <Route path="/customer" element={<Customer />} />
         <Route path="/profile" element={<Profile />} />

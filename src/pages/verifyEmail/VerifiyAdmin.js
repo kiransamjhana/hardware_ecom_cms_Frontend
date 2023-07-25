@@ -15,20 +15,15 @@ export const VerifiyAdmin = () => {
   const [showSpinner, setShowSpinner] = useState(true);
   const [resp, setResp] = useState({});
   useEffect(() => {
-    PostNewAdminVerificationInfo({ c, e }).then(
-      (resp) => {
-        setResp(resp);
-        setShowSpinner(false);
-        toast[resp.status](resp.message);
-        if (resp.status === "success") {
-          navigate("/");
-        }
-      },
-      [c, e, navigate]
-    );
-
-    console.log(resp);
-  });
+    PostNewAdminVerificationInfo({ c, e }).then((resp) => {
+      setResp(resp);
+      setShowSpinner(false);
+      toast[resp.status](resp.message);
+      if (resp.status === "success") {
+        navigate("/");
+      }
+    });
+  }, [c, e, navigate]);
   return (
     <div>
       <Header />

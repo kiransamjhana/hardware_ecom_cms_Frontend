@@ -38,3 +38,13 @@ export const PostNewAdminVerificationInfo = (data) => {
 
   return axiosProcessor(obj);
 };
+
+export const loginAdmin = (data) => {
+  console.log(data);
+  const obj = {
+    method: "post",
+    url: adminAPI + "/login",
+    obj: data,
+  };
+  return axiosProcessor(obj);
+};
