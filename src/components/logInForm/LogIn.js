@@ -4,12 +4,15 @@ import { Button, Form } from "react-bootstrap";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { loginAdminAction } from "../../pages/signIN-singUp/adminAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+const initialState = {
+  email: "",
+  password: "",
+};
 export const LogIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(initialState);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +63,13 @@ export const LogIn = () => {
         ))}
 
         <div className="d-grid">
-          <Button variant="primary" type="submit">
+          <Button variant="dark mt-5" type="submit">
             Login
           </Button>
+          <div className="text-end mt-5">
+            Forgot password? <Link to="/reset-password">Reset now</Link> .
+          </div>
+
           {/* <span>
             {" "}
             <Button variant="warning">Forget Password?</Button>

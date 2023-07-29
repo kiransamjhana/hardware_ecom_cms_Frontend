@@ -1,6 +1,6 @@
 import { SignIn } from "./pages/signIN-singUp/SignIn";
 import { SignUp } from "./pages/signIN-singUp/SignUp";
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -15,8 +15,14 @@ import { AdminUser } from "./pages/admin-user/AdminUser";
 import { Catagory } from "./pages/Catagory/Catagory";
 import { Customer } from "./pages/customer/Customer";
 import { Profile } from "./pages/profile/Profile";
+import { useDispatch } from "react-redux";
+import { getCatsAction } from "./pages/Catagory/categoryAction";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCatsAction);
+  });
   return (
     <div>
       <Routes>

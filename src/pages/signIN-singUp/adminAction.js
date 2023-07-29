@@ -14,6 +14,7 @@ export const createNewAdminAction = async (obj) => {
 
 export const loginAdminAction = (adminObj) => async (dispatch) => {
   const { status, message, admin } = await loginAdmin(adminObj);
+  console.log(adminObj);
 
   toast[status](message);
 
