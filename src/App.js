@@ -17,6 +17,7 @@ import { Customer } from "./pages/customer/Customer";
 import { Profile } from "./pages/profile/Profile";
 import { useDispatch } from "react-redux";
 import { getCatsAction } from "./pages/Catagory/categoryAction";
+import { PrivateRoute } from "./components/private/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,17 +28,84 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="/new-admin" element={<SignUp />} />
+        <Route
+          path="/new-admin"
+          element={
+            <PrivateRoute>
+              <SignUp />
+            </PrivateRoute>
+          }
+        />
         <Route path="/admin-verification" element={<VerifiyAdmin />} />
-        <Route path="/dashbord" element={<DashBoard />} />
-        <Route path="/category" element={<Catagory />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/payment-option" element={<Payment />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/customer" element={<Customer />} />
-        <Route path="/profile" element={<Profile />} />
 
-        <Route path="/admin-user" element={<AdminUser />} />
+        <Route
+          path="/dashbord"
+          element={
+            <PrivateRoute>
+              {" "}
+              <DashBoard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/category"
+          element={
+            <PrivateRoute>
+              {" "}
+              <Catagory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <PrivateRoute>
+              {" "}
+              <Product />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/payment-option"
+          element={
+            <PrivateRoute>
+              <Payment />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <PrivateRoute>
+              <Order />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/customer"
+          element={
+            <PrivateRoute>
+              <Customer />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin-user"
+          element={
+            <PrivateRoute>
+              <AdminUser />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <ToastContainer />
     </div>

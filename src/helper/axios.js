@@ -2,8 +2,15 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + "/admin";
 const categoryAPI = rootAPI + "/category";
+
+const getAccessJWT = () => {
+  return sessionStorage.getItem("accessJWT");
+};
 // Global axios proccesser function
-const axiosProcessor = async ({ method, url, obj }) => {
+const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+  const headers = {
+    Authorization: isPrivate ? getAccessJWT() : null,
+  };
   try {
     const { data } = await axios({
       method,
@@ -46,10 +53,18 @@ export const loginAdmin = (data) => {
     url: adminAPI + "/login",
     obj: data,
   };
-  console.log(obj);
+
   return axiosProcessor(obj);
 };
 
+export const getAdminInfo = (data) => {
+  const obj = {
+    method: "get",
+    url: adminAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
 //Catagory API
 
 export const postNewCategory = (data) => {
@@ -65,7 +80,7 @@ export const getCategories = () => {
   const obj = {
     method: "get",
     url: categoryAPI,
-    obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -73,7 +88,7 @@ export const getCategories = () => {
 export const updateCategory = (data) => {
   const obj = {
     method: "put",
-    url: catAPI,
+    url: categoryAPI,
     obj: data,
   };
   return axiosProcessor(obj);
@@ -82,7 +97,7 @@ export const updateCategory = (data) => {
 export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
-    url: catAPI + "/" + _id,
+    url: categoryAPI + "/" + _id,
   };
   return axiosProcessor(obj);
 };

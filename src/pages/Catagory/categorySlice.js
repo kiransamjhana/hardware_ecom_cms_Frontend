@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cats: [],
 };
-const adminSlice = createSlice({
+const catSlice = createSlice({
   name: "cat",
   initialState,
   reducers: {

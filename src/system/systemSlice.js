@@ -1,22 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cats: [],
+  modalShow: false,
 };
 const systemSlice = createSlice({
   name: "system",
   initialState,
   reducers: {
-    setSystem: (state, { payload }) => {
-      if (state.cats.length === 0 && payload.length === 0) {
-        return;
-      }
-      state.system = payload;
+    setModalShow: (state, { payload }) => {
+      state.modalShow = payload;
     },
   },
 });
 
 const { reducer, actions } = systemSlice;
-export const { systemSliceCats } = actions;
+
+export const { setModalShow } = actions;
+
 export default reducer;
-ß;

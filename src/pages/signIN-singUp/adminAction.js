@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { loginAdmin, postNewAdmin } from "../../helper/axios";
+import { getAdminInfo, loginAdmin, postNewAdmin } from "../../helper/axios";
 import { setAdmins } from "../admin-user/adminSlice";
 
 export const createNewAdminAction = async (obj) => {
@@ -12,11 +12,44 @@ export const createNewAdminAction = async (obj) => {
   toast[status](message);
 };
 
-export const loginAdminAction = (adminObj) => async (dispatch) => {
-  const { status, message, admin } = await loginAdmin(adminObj);
-  console.log(adminObj);
+export const loginAdminAction = (obj) => async (dispatch) => {
+  const pendingResp = loginAdmin(obj);
 
+  toast.promise(pendingResp, {
+    pending: "Please await..",
+  });
+  const { status, message, token } = await pendingResp;
+
+  console.log(token);
   toast[status](message);
 
-  admin?._id && dispatch(setAdmins(admin));
+  if (status === "success") {
+    sessionStorage.setItem("accessJWT", token.accessJWT);
+    localStorage.setItem("refreshJWT", token.refreshJWT);
+  }
+};
+
+//get admin profile
+
+export const getAdminProfileAction = () => async (dispatch) => {
+  //call the api to get user info
+  const { status, message, user } = await getAdminInfo();
+  // mount the state
+  if (status === " success") {
+    dispatch(setAdmins(user));
+  }
+};
+
+export const autoLogin = () => (dispatch) => {
+  //check if accessJwt exist in session
+  const accessJWT = sessionStorage.getItem("accessJWT");
+  if (accessJWT) {
+    dispatch(getAdminProfileAction());
+
+    const refreshJWT = localStorage.getItem("refreshJWT");
+    if (refreshJWT) {
+      //request new accessJWT from server and all getAdminProfile
+      return;
+    }
+  }
 };
