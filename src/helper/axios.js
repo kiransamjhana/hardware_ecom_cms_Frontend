@@ -6,16 +6,27 @@ const categoryAPI = rootAPI + "/category";
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
 };
+const getRefreshJWT = () => {
+  return localStorage.getItem("refreshJWT");
+};
 // Global axios proccesser function
-const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+const axiosProcessor = async ({
+  method,
+  url,
+  obj,
+  isPrivate,
+  refreshToken,
+}) => {
+  const token = refreshToken ? getRefreshJWT() : getAccessJWT();
   const headers = {
-    Authorization: isPrivate ? getAccessJWT() : null,
+    Authorization: isPrivate ? token : null,
   };
   try {
     const { data } = await axios({
       method,
       url,
       data: obj,
+      headers,
     });
 
     return data;
@@ -98,6 +109,30 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
     url: categoryAPI + "/" + _id,
+  };
+  return axiosProcessor(obj);
+};
+
+// ==== get new refreshJWT
+export const getNewRefreshJWT = () => {
+  const obj = {
+    method: "get",
+    url: adminAPI + "/get-accessjwt",
+    isPrivate: true,
+    refreshToken: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const logoutAdmin = (_id) => {
+  const obj = {
+    method: "post",
+    url: adminAPI + "/logout",
+    obj: {
+      _id,
+      accessJwt: getAccessJWT(),
+      refreshJWT: getRefreshJWT(),
+    },
   };
   return axiosProcessor(obj);
 };

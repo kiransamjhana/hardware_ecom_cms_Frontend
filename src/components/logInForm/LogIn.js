@@ -17,6 +17,7 @@ export const LogIn = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const { admins } = useSelector((state) => state.adminInfo);
+  console.log(admins);
   const location = useLocation();
   const pathTo = location.state?.from?.location?.pathname || "/dashbord";
   useEffect(() => {
