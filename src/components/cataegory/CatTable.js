@@ -10,9 +10,9 @@ import { Button, Form } from "react-bootstrap";
 function CatTable() {
   const dispatch = useDispatch();
   const [selectedCat, setselectedCat] = useState({});
-  const { cats } = useSelector((state) => state.catsInfo);
+  const { cats } = useSelector((state) => state.catInfo);
   useEffect(() => {
-    !cats.length && dispatch(getCatsAction());
+    dispatch(getCatsAction());
   }, [dispatch]);
 
   const handleOnEdit = (obj) => {

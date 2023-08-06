@@ -1,13 +1,11 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalShow } from "../../system/systemSlice";
 
-export const CustomModal = (child) => {
+export const CustomModal = ({ children, title }) => {
   const dispatch = useDispatch();
-  const [modalshow, setModelShow] = useState(false);
-  const { cats } = useSelector((state) => state.system);
+
+  const { modalShow } = useSelector((state) => state.system);
   return (
     <Modal
       Modal

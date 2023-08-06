@@ -68,7 +68,7 @@ export const loginAdmin = (data) => {
   return axiosProcessor(obj);
 };
 
-export const getAdminInfo = (data) => {
+export const getAdminInfo = () => {
   const obj = {
     method: "get",
     url: adminAPI,
@@ -83,6 +83,7 @@ export const postNewCategory = (data) => {
     method: "post",
     url: categoryAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -101,6 +102,7 @@ export const updateCategory = (data) => {
     method: "put",
     url: categoryAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -109,6 +111,7 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
     url: categoryAPI + "/" + _id,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };

@@ -13,22 +13,18 @@ const initialState = {
   password: "",
 };
 export const LogIn = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const { admins } = useSelector((state) => state.adminInfo);
   console.log(admins);
-  const location = useLocation();
+
   const pathTo = location.state?.from?.location?.pathname || "/dashbord";
   useEffect(() => {
     admins?._id && navigate(pathTo);
     dispatch(autoLogin());
   }, [admins, navigate, dispatch, pathTo]);
-
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-    dispatch(loginAdminAction(form));
-  };
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -37,6 +33,11 @@ export const LogIn = () => {
       ...form,
       [name]: value,
     });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginAdminAction(form));
   };
   const inputs = [
     {

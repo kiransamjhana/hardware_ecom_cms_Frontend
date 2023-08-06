@@ -8,12 +8,12 @@ import {
 import { setAdmins } from "../admin-user/adminSlice";
 
 export const createNewAdminAction = async (obj) => {
-  const pendingResponse = postNewAdmin(obj);
+  const pendingResp = postNewAdmin(obj);
 
-  toast.promise(pendingResponse, {
+  toast.promise(pendingResp, {
     pending: " please wait ..",
   });
-  const { status, message } = await pendingResponse;
+  const { status, message } = await pendingResp;
   toast[status](message);
 };
 
@@ -25,7 +25,6 @@ export const loginAdminAction = (obj) => async (dispatch) => {
   });
   const { status, message, token } = await pendingResp;
 
-  console.log(token);
   toast[status](message);
 
   if (status === "success") {
@@ -41,8 +40,10 @@ export const loginAdminAction = (obj) => async (dispatch) => {
 export const getAdminProfileAction = () => async (dispatch) => {
   //call the api to get user info
   const { status, user } = await getAdminInfo();
+  console.log(user, status);
+
   // mount the state
-  if (status === " success") {
+  if (status === "success") {
     dispatch(setAdmins(user));
   }
 };

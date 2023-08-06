@@ -13,7 +13,7 @@ export const postNewCatAction = (obj) => async (dispatch) => {
 
   toast[status](message);
   if (status === "success") {
-    dispatch(getCategories());
+    dispatch(getCatsAction());
   }
 };
 export const getCatsAction = () => async (dispatch) => {
