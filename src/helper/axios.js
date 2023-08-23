@@ -2,6 +2,7 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const adminAPI = rootAPI + "/admin";
 const categoryAPI = rootAPI + "/category";
+const poAPI = rootAPI + "/payment";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -117,7 +118,7 @@ export const deleteCategory = (_id) => {
 };
 
 // ==== get new refreshJWT
-export const getNewRefreshJWT = () => {
+export const getNewAccessJWT = () => {
   const obj = {
     method: "get",
     url: adminAPI + "/get-accessjwt",
@@ -136,6 +137,67 @@ export const logoutAdmin = (_id) => {
       accessJwt: getAccessJWT(),
       refreshJWT: getRefreshJWT(),
     },
+  };
+  return axiosProcessor(obj);
+};
+
+////========PaymentOptions
+export const postNewPyOp = (data) => {
+  const obj = {
+    method: "post",
+    url: poAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const getNewPyOpts = (data) => {
+  const obj = {
+    method: "get",
+    url: poAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+// ========== Payment Option
+
+export const postNewPO = (data) => {
+  const obj = {
+    method: "post",
+    url: poAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const getNewPOs = () => {
+  const obj = {
+    method: "get",
+    url: poAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const updateNewPOs = (data) => {
+  const obj = {
+    method: "put",
+    url: poAPI,
+    isPrivate: true,
+    obj: data,
+  };
+  return axiosProcessor(obj);
+};
+
+export const deletePO = (_id) => {
+  const obj = {
+    method: "delete",
+    url: poAPI + "/" + _id,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
