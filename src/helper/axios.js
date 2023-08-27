@@ -45,10 +45,31 @@ export const postNewAdmin = (data) => {
     method: "post",
     url: adminAPI,
     obj: data,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const updateAdmin = (data) => {
+  const obj = {
+    method: "put",
+    url: adminAPI,
+    obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
 
+//update admin password
+export const updateAdminPassword = (data) => {
+  const obj = {
+    method: "put",
+    url: adminAPI + "/change-password",
+    obj: data,
+    isPrivate: true,
+  };
+
+  return axiosProcessor(obj);
+};
 export const PostNewAdminVerificationInfo = (data) => {
   const obj = {
     method: "post",
@@ -73,6 +94,14 @@ export const getAdminInfo = () => {
   const obj = {
     method: "get",
     url: adminAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const getAllAdminInfo = () => {
+  const obj = {
+    method: "get",
+    url: adminAPI + "/display",
     isPrivate: true,
   };
   return axiosProcessor(obj);

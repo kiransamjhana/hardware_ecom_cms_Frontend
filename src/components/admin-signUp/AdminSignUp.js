@@ -5,6 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { CustomInput } from "../customI-Input/CustomInput";
 import { createNewAdminAction } from "../../pages/signIN-singUp/adminAction";
+
 export const AdminSignUp = () => {
   const [form, setForm] = useState({});
   const inputs = [

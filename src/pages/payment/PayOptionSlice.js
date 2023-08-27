@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  payOptios: [],
+  payOptions: [],
 };
 const payOptiosSlice = createSlice({
   name: "payOptions",
   initialState,
   reducers: {
     setCats: (state, { payload }) => {
-      if (state.paymentOptions.length === 0 && payload.length === 0) {
+      if (state.payOptions.length === 0 && payload.length === 0) {
         return;
       }
-      state.payOptios = payload;
+      state.payOptions = payload;
     },
   },
 });

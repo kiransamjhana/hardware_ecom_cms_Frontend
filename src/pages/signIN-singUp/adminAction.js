@@ -1,11 +1,14 @@
 import { toast } from "react-toastify";
 import {
   getAdminInfo,
+  getAllAdminInfo,
   getNewAccessJWT,
   loginAdmin,
   postNewAdmin,
+  updateAdmin,
+  updateAdminPassword,
 } from "../../helper/axios";
-import { setAdmins } from "../admin-user/adminSlice";
+import { setAdmin, setAdmins } from "../admin-user/adminSlice";
 
 export const createNewAdminAction = async (obj) => {
   const pendingResp = postNewAdmin(obj);
@@ -48,6 +51,49 @@ export const getAdminProfileAction = () => async (dispatch) => {
   }
 };
 
+export const getAdminsProfileAction = () => async (dispatch) => {
+  //call the api to get user info
+  const { status, user } = await getAllAdminInfo();
+  console.log(user, status);
+
+  // mount the state
+  if (status === "success") {
+    dispatch(setAdmin(user));
+  }
+};
+export const updateAdminProfileAction = (obj) => async (dispatch) => {
+  //call the api to get user info
+
+  const isLoading = updateAdmin(obj);
+  toast.promise(isLoading, {
+    pending: "Please await..",
+  });
+
+  const { status, message } = await isLoading;
+
+  // mount the state
+  // if (status === "success") {
+  toast[status](message);
+  // }
+};
+
+//change admin password
+export const updateAdminPasswordAction = (obj) => async (dispatch) => {
+  //call the api to get user info
+
+  const isLoading = updateAdminPassword(obj);
+  toast.promise(isLoading, {
+    pending: "Please await..",
+  });
+
+  const { status, message } = await isLoading;
+
+  // mount the state
+  // if (status === "success") {
+  toast[status](message);
+  // }
+  // }
+};
 export const autoLogin = () => async (dispatch) => {
   //check if accessJwt exist in session
   const accessJWT = sessionStorage.getItem("accessJWT");

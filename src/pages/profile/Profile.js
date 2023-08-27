@@ -1,10 +1,14 @@
 import React from "react";
 import { AdminLayout } from "../../components/layout/layout/AdminLayout";
 
+import { UpdateProfile } from "../../components/Profile/UpdateProfile";
+
 export const Profile = () => {
   return (
     <div>
-      <AdminLayout title="profile"> this is your profile</AdminLayout>
+      <AdminLayout title="profile">
+        <UpdateProfile />
+      </AdminLayout>
     </div>
   );
 };

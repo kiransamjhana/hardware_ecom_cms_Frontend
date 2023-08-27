@@ -12,8 +12,8 @@ import { EditPaymentOption } from "./EditPaymentOption";
 function PaymentOptionTable() {
   const dispatch = useDispatch();
   const [selectedPo, setselectedPo] = useState({});
-  const { paymentOptions } = useSelector((state) => state.poInfo);
-  console.log(paymentOptions);
+  const { payOptions } = useSelector((state) => state.poInfo);
+
   useEffect(() => {
     dispatch(getPayOpsAction());
   }, [dispatch]);
@@ -28,7 +28,7 @@ function PaymentOptionTable() {
         <EditPaymentOption po={selectedPo} />
       </CustomModal>
       <div className="d-flex justify-content-between mt-5">
-        <div>{paymentOptions?.length} Payment options Found</div>
+        <div>{payOptions?.length} Payment options Found</div>
         <div>
           <Form.Control placeholder="Serach by name ..." />
         </div>
@@ -45,7 +45,7 @@ function PaymentOptionTable() {
           </tr>
         </thead>
         <tbody>
-          {paymentOptions?.map(
+          {payOptions?.map(
             ({ _id, status, title, description, createdAt }, i) => (
               <tr key={_id}>
                 <td>{i + 1}</td>
