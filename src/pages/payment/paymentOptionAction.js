@@ -4,6 +4,7 @@ import {
   deletePO,
   getAdminInfo,
   getNewPyOpts,
+  postNewPyOp,
   updateNewPOs,
 } from "../../helper/axios";
 import { setAdmins } from "../admin-user/adminSlice";
@@ -19,6 +20,13 @@ export const getAdminProfileAction = () => async (dispatch) => {
   if (status === "success") {
     dispatch(setAdmins(user));
   }
+};
+// post new payment options
+export const postNewPayAction = (obj) => async (dispatch) => {
+  const { status, message } = await postNewPyOp(obj);
+
+  toast[status](message);
+  status === "success" && dispatch(getPayOpsAction());
 };
 
 export const getPayOpsAction = () => async (dispatch) => {

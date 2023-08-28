@@ -32,6 +32,12 @@ export const AdminProfile = () => {
       type: "text",
     },
     {
+      label: "Email",
+      name: "email",
+      value: form.email,
+      type: "email",
+    },
+    {
       label: "Phone Number",
       name: "phone",
       value: form.phone,

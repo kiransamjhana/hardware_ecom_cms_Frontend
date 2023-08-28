@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   payOptions: [],
 };
-const payOptiosSlice = createSlice({
-  name: "payOptions",
+const payOptionsSlice = createSlice({
+  name: "payOption",
   initialState,
   reducers: {
-    setCats: (state, { payload }) => {
+    setPayOptions: (state, { payload }) => {
       if (state.payOptions.length === 0 && payload.length === 0) {
         return;
       }
@@ -16,6 +16,6 @@ const payOptiosSlice = createSlice({
   },
 });
 
-const { reducer, actions } = payOptiosSlice;
+const { reducer, actions } = payOptionsSlice;
 export const { setPayOptions } = actions;
 export default reducer;

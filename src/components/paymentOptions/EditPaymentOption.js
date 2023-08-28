@@ -83,13 +83,13 @@ export const EditPaymentOption = ({ po }) => {
               <Button variant="dark" type="submit">
                 Update Payment Option
               </Button>
+              <div className="d-grid mt-3">
+                <Button variant="danger" type="submit" onClick={handleOnDelete}>
+                  Delete Payment Option
+                </Button>
+              </div>
             </div>
           </Form>
-          <div className="d-grid mt-3">
-            <Button variant="danger" type="submit" onClick={handleOnDelete}>
-              Delete Payment Option
-            </Button>
-          </div>
         </Col>
       </Row>
     </div>

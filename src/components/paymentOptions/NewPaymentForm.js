@@ -2,7 +2,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { CustomInput } from "../customI-Input/CustomInput";
 import { useState } from "react";
-import { getPayOpsAction } from "../../pages/payment/paymentOptionAction";
+import { postNewPayAction } from "../../pages/payment/paymentOptionAction";
 
 const initialState = {
   status: "",
@@ -22,7 +22,7 @@ export const NewPaymentOptionForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(getPayOpsAction(form));
+    dispatch(postNewPayAction(form));
     setForm(initialState);
   };
   return (
