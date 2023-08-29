@@ -7,6 +7,7 @@ import {
   updateAdminPasswordAction,
   updateAdminProfileAction,
 } from "../../pages/signIN-singUp/adminAction";
+import { toast } from "react-toastify";
 
 export const AdminProfile = () => {
   const dispatch = useDispatch();
@@ -78,12 +79,17 @@ export const AdminProfile = () => {
   };
   const handleOnPasswordSubmitt = (e) => {
     e.preventDefault();
+    if (passForm.confirmPass !== passForm.NewPassword) {
+      return toast.error(
+        "Your New Password and confirm Password should  match"
+      );
+    }
     dispatch(updateAdminPasswordAction(passForm));
-    console.log(passForm);
   };
+
   return (
     <div>
-      <Row>
+      <Row className="d-flex">
         <Col>
           {" "}
           <Form
