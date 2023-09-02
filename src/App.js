@@ -18,12 +18,15 @@ import { Profile } from "./pages/profile/Profile";
 import { useDispatch } from "react-redux";
 import { getCatsAction } from "./pages/Catagory/categoryAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
+import { NewProuduct } from "./pages/product/NewProuduct";
+import { getProductsAction } from "./pages/product/productAction";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCatsAction);
-  });
+    dispatch(getCatsAction());
+    dispatch(getProductsAction());
+  }, [dispatch]);
   return (
     <div>
       <Routes>
@@ -62,6 +65,15 @@ function App() {
             <PrivateRoute>
               {" "}
               <Product />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/new-product"
+          element={
+            <PrivateRoute>
+              {" "}
+              <NewProuduct />{" "}
             </PrivateRoute>
           }
         />

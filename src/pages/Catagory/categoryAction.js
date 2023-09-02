@@ -18,7 +18,7 @@ export const postNewCatAction = (obj) => async (dispatch) => {
 };
 export const getCatsAction = () => async (dispatch) => {
   const { status, result } = await getCategories();
-
+  console.log(result);
   if (status === "success") {
     // mount in the state
     dispatch(setCats(result));

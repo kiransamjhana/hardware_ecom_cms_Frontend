@@ -89,7 +89,7 @@ export const AdminProfile = () => {
 
   return (
     <div>
-      <Row className="d-flex">
+      <Row>
         <Col>
           {" "}
           <Form
