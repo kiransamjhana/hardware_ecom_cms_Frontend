@@ -20,6 +20,7 @@ import { getCatsAction } from "./pages/Catagory/categoryAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
 import { NewProuduct } from "./pages/product/NewProuduct";
 import { getProductsAction } from "./pages/product/productAction";
+import EditProduct from "./pages/product/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +75,14 @@ function App() {
             <PrivateRoute>
               {" "}
               <NewProuduct />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="product/edit/:_id"
+          element={
+            <PrivateRoute>
+              <EditProduct />
             </PrivateRoute>
           }
         />

@@ -1,7 +1,18 @@
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsAction } from "../../pages/product/productAction";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export const ProductTable = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.productInfo);
+
+  useEffect(() => {
+    dispatch(getProductsAction());
+  }, [dispatch]);
+
   return (
     <div className="mt-5">
       <div className="d-flex justify-content-between mb-3">
@@ -14,29 +25,40 @@ export const ProductTable = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Thumbnail </th>
+            <th>status</th>
+
+            <th>Name</th>
+            <th>QTY</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {products.map((item, i) => (
+            <tr key={item._id}>
+              <td>{i + 1}</td>
+              <td>
+                <img
+                  src={
+                    process.env.REACT_APP_ROOTSERVER + item?.thumbnail?.slice(6)
+                  }
+                  alt="img"
+                  width="150px"
+                />
+              </td>
+              <td>{item.status}</td>
+              <td>
+                <h3> {item.name}</h3>
+                Price: {item.price}
+              </td>
+              <td>{item.qty}</td>
+              <td>
+                <Link to={`/product/edit/${item._id}`}>
+                  <Button variant="warning">Edit</Button>
+                </Link>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>

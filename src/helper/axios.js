@@ -252,10 +252,28 @@ export const getProducts = () => {
   return axiosProcessor(obj);
 };
 
+export const getProductById = (_id) => {
+  console.log(_id);
+  const obj = {
+    method: "get",
+    url: productAPI + `/edit/` + _id,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
 export const deleteProduct = (_id) => {
   const obj = {
     method: "delete",
     url: productAPI + "/" + _id,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const updateProduct = (data) => {
+  const obj = {
+    method: "put",
+    url: productAPI,
+    obj: data,
     isPrivate: true,
   };
   return axiosProcessor(obj);
