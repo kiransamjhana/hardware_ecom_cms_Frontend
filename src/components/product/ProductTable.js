@@ -16,7 +16,7 @@ export const ProductTable = () => {
   return (
     <div className="mt-5">
       <div className="d-flex justify-content-between mb-3">
-        <div>10 products found</div>
+        <div>{products.length} Product found</div>
         <div>
           <Form.Control type="text" placeholder="Search Product by Name" />
         </div>

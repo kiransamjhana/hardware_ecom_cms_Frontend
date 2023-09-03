@@ -25,7 +25,6 @@ import EditProduct from "./pages/product/EditProduct";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCatsAction());
     dispatch(getProductsAction());
   }, [dispatch]);
   return (
