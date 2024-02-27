@@ -13,7 +13,7 @@ import { CustomInput } from "../../components/customI-Input/CustomInput";
 
 const EditProduct = () => {
   const { _id } = useParams();
-  console.log(_id);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();

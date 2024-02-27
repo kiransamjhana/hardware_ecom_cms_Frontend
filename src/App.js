@@ -21,6 +21,7 @@ import { PrivateRoute } from "./components/private/PrivateRoute";
 import { NewProuduct } from "./pages/product/NewProuduct";
 import { getProductsAction } from "./pages/product/productAction";
 import EditProduct from "./pages/product/EditProduct";
+import EditOrder from "./components/order/EditOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -98,6 +99,15 @@ function App() {
           element={
             <PrivateRoute>
               <Order />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="order/edit/:_id"
+          element={
+            <PrivateRoute>
+              <EditOrder />
             </PrivateRoute>
           }
         />

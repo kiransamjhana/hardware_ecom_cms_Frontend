@@ -4,6 +4,7 @@ const adminAPI = rootAPI + "/admin";
 const categoryAPI = rootAPI + "/category";
 const poAPI = rootAPI + "/payment";
 const productAPI = rootAPI + "/product";
+const orderAPI = rootAPI + "/order";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -30,7 +31,6 @@ const axiosProcessor = async ({
       data: obj,
       headers,
     });
-
     return data;
   } catch (error) {
     return {
@@ -57,6 +57,7 @@ export const updateAdmin = (data) => {
     obj: data,
     isPrivate: true,
   };
+
   return axiosProcessor(obj);
 };
 
@@ -253,7 +254,6 @@ export const getProducts = () => {
 };
 
 export const getProductById = (_id) => {
-  console.log(_id);
   const obj = {
     method: "get",
     url: productAPI + `/edit/` + _id,
@@ -276,5 +276,27 @@ export const updateProduct = (data) => {
     obj: data,
     isPrivate: true,
   };
+  return axiosProcessor(obj);
+};
+
+//Orders API
+export const getAllOrders = () => {
+  const obj = {
+    method: "get",
+    url: orderAPI,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const getOrderById = (_id) => {
+  console.log(_id, "coming from axious");
+  const obj = {
+    method: "get",
+    url: orderAPI + "/edit/" + _id,
+    isPrivate: true,
+  };
+  console.log(obj);
+
   return axiosProcessor(obj);
 };

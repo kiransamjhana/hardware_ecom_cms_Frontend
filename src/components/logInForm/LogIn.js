@@ -21,6 +21,7 @@ export const LogIn = () => {
   console.log(admins);
 
   const pathTo = location.state?.from?.location?.pathname || "/dashbord";
+  console.log(pathTo);
   useEffect(() => {
     admins?._id && navigate(pathTo);
     dispatch(autoLogin());
