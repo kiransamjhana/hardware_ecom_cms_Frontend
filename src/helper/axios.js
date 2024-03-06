@@ -300,3 +300,15 @@ export const getOrderById = (_id) => {
 
   return axiosProcessor(obj);
 };
+
+//update
+
+export const updateOrderStatusById = async (_id, delivered, orderStatus) => {
+  const obj = {
+    method: "put",
+    url: orderAPI + "/update/" + _id,
+  };
+  console.log(obj);
+
+  return axiosProcessor(obj);
+};

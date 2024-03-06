@@ -4,13 +4,19 @@ import { Link, useParams } from "react-router-dom";
 import { AdminLayout } from "../layout/layout/AdminLayout";
 import { Button, Form, Table } from "react-bootstrap";
 
-import { getOrderById } from "../../helper/axios";
+import {
+  getOrderById,
+  updateOrderStatus,
+  updateOrderStatusById,
+} from "../../helper/axios";
 
 import ListGroup from "react-bootstrap/ListGroup";
 
 const EditOrder = () => {
   const { _id } = useParams();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({ products: [] });
+  const [delivered, setDelivered] = useState("delivered");
+  const [updatedOrderStatus, setUpdatedOrderStatus] = useState(false);
   console.log(_id, "from edit order");
 
   useEffect(() => {
@@ -21,10 +27,27 @@ const EditOrder = () => {
     }
     getSelectedOrder();
   }, [_id]);
-  console.log(form);
+  console.log(form, "from ediotoooo");
 
-  const { products } = form;
-  // set all from data in FormDate
+  const { products, orderStatus } = form;0
+  console.log(products, orderStatus, "coming from orderEdit");
+  // set all from data in FormDate\
+  const handleUpdateOrderStatus = async () => {
+    if (!window.confirm("Are you sure the items are delivered to Customer")) {
+      return;
+    }
+    try {
+      // Make a request to update order status
+      await updateOrderStatusById(_id);
+
+      // Update the local state with the new order status
+      // setForm((prevForm) => ({ ...prevForm, orderStatus: delivered }));
+
+      setUpdatedOrderStatus(true); // Update the state to trigger a re-fetch of order data
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  };
 
   return (
     <AdminLayout title="Edit Product">
@@ -68,6 +91,15 @@ const EditOrder = () => {
             <div className="ms-2 me-auto">
               <div className="fw-bold">Delivery ADRESSS</div>
               {form.address}
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item
+            as="li"
+            className="d-flex justify-content-between align-items-start"
+          >
+            <div className="ms-2 me-auto">
+              <div className="fw-bold">Order Status</div>
+              {form.orderStatus}
             </div>
           </ListGroup.Item>
 
@@ -114,6 +146,16 @@ const EditOrder = () => {
             ))}
           </tbody>
         </Table>
+      </div>
+
+      <div className="d-grid mt-3 mb-3">
+        <Button
+          variant="success"
+          type="submit"
+          onClick={handleUpdateOrderStatus}
+        >
+          Update Order
+        </Button>
       </div>
     </AdminLayout>
   );
