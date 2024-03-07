@@ -29,7 +29,7 @@ const EditOrder = () => {
   }, [_id]);
   console.log(form, "from ediotoooo");
 
-  const { products, orderStatus } = form;0
+  const { products, orderStatus } = form;
   console.log(products, orderStatus, "coming from orderEdit");
   // set all from data in FormDate\
   const handleUpdateOrderStatus = async () => {
